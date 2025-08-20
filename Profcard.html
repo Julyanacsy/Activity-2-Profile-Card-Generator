@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity 1 Profile Card Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center; 
+      align-items: flex-start; 
+      gap: 50px; 
+      margin-top: 20px;
+    }
+
+    .form-section {
+      max-width: 250px;
+    }
+
+    .profile-card {
+      border: 1px solid #888;
+      padding: 15px;
+      width: 250px;
+      border-radius: 8px;
+    }
+
+    .like-btn {
+      background-color: #f08080;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">Profile Card Generator</h2>
+
+  <div class="container">
+
+    <div class="form-section">
+      <label>Name: <input type="text" id="name" /></label><br><br>
+      <label>Course: <input type="text" id="course" /></label><br><br>
+      <label>Bio: <input type="text" id="bio" /></label><br><br>
+      <label>Favorite Color: <input type="color" id="color" /></label><br><br>
+      <button onclick="generateCard()">Generate Profile Card</button>
+    </div>
+
+    <div id="cardPreview" class="profile-card" style="display:none;">
+      <h3 id="cardName"></h3>
+      <p id="cardCourse"></p>
+      <p id="cardBio"></p>
+      <button id="likeBtn" class="like-btn" onclick="likeProfile()">❤️ Like</button>
+      <p id="likeCount">0 likes</p>
+    </div>
+  </div>
+
+  <script>
+    let likes = 0;
+    let liked = false;
+
+    function generateCard() {
+      const name = document.getElementById('name').value;
+      const course = document.getElementById('course').value;
+      const bio = document.getElementById('bio').value;
+      const color = document.getElementById('color').value;
+
+      document.getElementById('cardName').innerText = name;
+      document.getElementById('cardCourse').innerText = course;
+      document.getElementById('cardBio').innerText = bio;
+      document.getElementById('cardPreview').style.display = 'block';
+      document.getElementById('cardPreview').style.borderColor = color;
+    }
+
+    function likeProfile() {
+      if (!liked) {
+        likes++;
+        liked = true;
+        document.getElementById('likeBtn').innerText = "💔 Unlike";
+      } else {
+        likes--;
+        liked = false;
+        document.getElementById('likeBtn').innerText = "❤️ Like";
+      }
+      document.getElementById('likeCount').innerText = likes + (likes === 1 ? " like" : " likes");
+    }
+  </script>
+
+</body>
+</html>
